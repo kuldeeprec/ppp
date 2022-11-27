@@ -93,11 +93,13 @@ export default {
   methods: {
     fetchTodos() {
       const uri = "/notes";
-      this.axios.get(uri).then(response => {
-        this.notes = response.data;
-        this.noteNumber = this.notes.length;
-        this.notePlural = this.noteNumber === 1 ? "note" : "notes";
-      });
+      this.axios
+        .post(uri, { email: localStorage.getItem("email") })
+        .then((response) => {
+          this.notes = response.data;
+          this.noteNumber = this.notes.length;
+          this.notePlural = this.noteNumber === 1 ? "note" : "notes";
+        });
     },
 
     deleteNote(id) {

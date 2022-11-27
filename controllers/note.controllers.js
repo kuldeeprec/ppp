@@ -12,7 +12,8 @@ exports.get_login = async (req, res) => {
 // display notes using GET
 exports.get_notes = async (req, res) => {
   try {
-    const notes = await Note.find();
+    console.log(req.body.email);
+    const notes = await Note.find({ email: req.body.email });
     if (!notes) throw new Error("No notes found");
     const time_order = notes.sort((a, b) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -25,6 +26,7 @@ exports.get_notes = async (req, res) => {
 
 // add new note to database using POST
 exports.post_note = async (req, res) => {
+  console.log(req.body);
   const newNote = new Note(req.body);
   try {
     const note = await newNote.save();
@@ -91,10 +93,16 @@ module.exports.signup = async function (req, res) {
         email: req.body.email,
         password: hashedPassword,
       });
+      console.log(user);
       if (user) {
-        return res.json(200, {
-          message: "succesfully sign up",
+        var options = {
+          expires: new Date(Date.now() + 10000000),
+        };
+        const token = jwt.sign(user.toJSON(), "shivansh", {
+          expiresIn: "10000000",
         });
+        res.cookie("jwt", token, options);
+        return res.send("succes fully signup");
       }
     }
     return res.json(401, {
@@ -127,11 +135,11 @@ module.exports.login = async function (req, res) {
     //   },
     // });
     var options = {
-      expires: new Date(Date.now() + 1000000),
-      httpOnly: true,
-      sameSite: "strict",
+      expires: new Date(Date.now() + 10000000),
     };
-    const token = jwt.sign(user.toJSON(), "shivansh", { expiresIn: "1000000" });
+    const token = jwt.sign(user.toJSON(), "shivansh", {
+      expiresIn: "10000000",
+    });
     res.cookie("jwt", token, options);
     return res.send("succes fully login");
   } catch (err) {

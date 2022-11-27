@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const { PORT, mongoUri } = require("./config/config");
 const cookieParser = require("cookie-parser");
 const passportJWT = require("./config/passport-jwt-strategy");
+const history = require("connect-history-api-fallback");
+app.use(history());
 const noteRoute = require("./routes/note.routes");
 const path = require("path");
 const { env } = require("process");

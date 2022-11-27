@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-content-center">
       <div class="alert alert-primary border-primary p-2 m-0" role="alert">
-        <h3 class="alert-heading text-center">Edit Password </h3>
+        <h3 class="alert-heading text-center">Edit Password</h3>
         <hr class="m-2" />
         <!-- <p class="mb-0 text-center">
           You have
@@ -86,11 +86,12 @@
 export default {
   data() {
     return {
-      note: {},
+      note: { email: localStorage.getItem("email") },
       maxCount: 280,
       remainingCount: 280,
       title: "",
       body: "",
+      email: "",
       hasError: false,
       isDisabled: false,
       initialBodyLength: 0
@@ -128,7 +129,10 @@ export default {
       this.isDisabled = this.note.title.length < 4 || this.note.body.length < 4;
     },
     async calcRemaining() {
-      this.remainingCount = this.note.body.length == null | 0 ? this.maxCount : this.maxCount - this.note.body.length;
+      this.remainingCount =
+        (this.note.body.length == null) | 0
+          ? this.maxCount
+          : this.maxCount - this.note.body.length;
     }
   }
 };

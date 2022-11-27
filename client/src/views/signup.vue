@@ -1,108 +1,171 @@
 <template>
-   <form action="/action_page.php" style="border:1px solid #ccc">
-  <div class="container">
-    <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-    </label>
-
-    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
+  <div>
+    <div class="d-flex justify-content-center">
+      <div class="alert alert-primary border-primary p-2 m-0" role="alert">
+        <h3 class="alert-heading text-center">signup</h3>
+        <hr class="m-2" />
+        <!-- <p class="mb-0 text-center">
+          You have
+          <span
+            class="badge badge-pill badge-light text-dark"
+            style="font-size: 0.9em;"
+            v-bind:class="{'text-danger': hasError }"
+          >{{ remainingCount }}</span> characters
+        </p> -->
+      </div>
     </div>
-  </div>
-</form>
+    <br />
+    <form @submit.prevent="signup">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label
+              >enter name<br />
+              <!-- <select class="select" id="select-code">
+    <option value="">Select a code</option>
+    <option value="value1">Code 1</option>
+    <option value="value2">Code 2</option>
+    <option value="value3">Code 3</option>
+    <option value="value4">Code 4</option>
+</select>
+<button id="code-btn">confirm</button><br>
+<input id='input' name="my-quote" type="text" placeholder="type of password ">
 
+document.getElementById('code-btn').onclick = () => {
+let e = document.getElementById('select-code');
+document.getElementById('input').value =  e.options[e.selectedIndex].text;
+} -->
+            </label>
+            <input
+              id="name"
+              type="option"
+              class="form-control"
+              v-model="note.name"
+              placeholder="enter name"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label
+              >enter email id<br />
+              <!-- <select class="select" id="select-code">
+    <option value="">Select a code</option>
+    <option value="value1">Code 1</option>
+    <option value="value2">Code 2</option>
+    <option value="value3">Code 3</option>
+    <option value="value4">Code 4</option>
+</select>
+<button id="code-btn">confirm</button><br>
+<input id='input' name="my-quote" type="text" placeholder="type of password ">
+
+document.getElementById('code-btn').onclick = () => {
+let e = document.getElementById('select-code');
+document.getElementById('input').value =  e.options[e.selectedIndex].text;
+} -->
+            </label>
+            <input
+              id="email"
+              type="option"
+              class="form-control"
+              v-model="note.email"
+              placeholder="enter email id"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>enter password:</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              v-model="note.password"
+              v-on:keyup="countdown"
+              placeholder="Enter password"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>confirm password:</label>
+            <input
+              type="password"
+              id="confirmpassword"
+              class="form-control"
+              v-model="note.confirm_password"
+              v-on:keyup="countdown"
+              placeholder="Enter confirm password"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="form-group">
+          <div class="col-md-6 d-flex">
+            <button class="btn btn-primary mr-4" :disabled="isDisabled">
+              signup
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning mr-4"
+              :disabled="!note.title && !note.body"
+              @click.prevent="clearInputs()"
+            >
+              Clear
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              @click.prevent="backToNotes()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Signup"
-}
-</script>
+  data() {
+    return {
+      note: {},
+      maxCount: 280,
+      remainingCount: 280,
+      password: "",
+      confirm_password: "",
+      email: "",
+      name: "",
+      hasError: false,
+      isDisabled: false
+    };
+  },
 
-<style scoped>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-button:hover {
-  opacity:1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
+  methods: {
+    signup() {
+      const uri = "/notes/signup";
+      this.axios.post(uri, this.note).then(() => {
+        this.$router.push({ name: "notes" });
+      });
+    },
+    clearInputs() {
+      this.note = {};
+      this.isDisabled = true;
+      this.remainingCount = 280;
+    },
+    backToNotes() {
+      this.$router.push("/");
+    }
   }
-}
-</style>
+};
+</script>

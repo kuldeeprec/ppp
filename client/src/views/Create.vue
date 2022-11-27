@@ -97,11 +97,12 @@ document.getElementById('input').value =  e.options[e.selectedIndex].text;
 export default {
   data() {
     return {
-      note: {},
+      note: { email: localStorage.getItem("email") },
       maxCount: 280,
       remainingCount: 280,
       title: "",
       body: "",
+      email: "",
       hasError: false,
       isDisabled: true
     };
