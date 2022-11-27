@@ -1,31 +1,37 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+import Create from "../views/Create.vue";
+import Index from "../views/Index.vue";
+import Login from "../views/Login.vue";
+import Edit from "../views/Edit.vue";
+import Info from "../views/Info.vue";
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "notes",
-  //   component: () => import("../views/Index.vue")
-  // },
   {
     path: "/",
-    name: "create",
-    component: () => import("../views/Create.vue")
+    name: "notes",
+    component: Index
   },
-  // {
-  //   path: "/",
-  //   name: "Login",
-  //   component: () => import("../views/Login.vue")
-  // },
+
+  {
+    path: "/create",
+    name: "create",
+    component: Create
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login
+  },
 
   {
     path: "/edit/:id",
     name: "edit",
-    component: () => import("../views/Edit.vue")
+    component: Edit
   },
   {
     path: "/info",
     name: "info",
-    component: () => import("../views/Info.vue")
+    component: Info
   }
 ];
 

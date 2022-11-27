@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-content-center">
       <div class="alert alert-primary border-primary p-2 m-0" role="alert">
-        <h3 class="alert-heading text-center">Secure Notes </h3>
+        <h3 class="alert-heading text-center">Secure Notes</h3>
         <hr class="m-2" />
         <!-- <p class="mb-0 text-center">
           You have
@@ -19,8 +19,9 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="form-group">
-            <label>Select Type Of Password:<br>
-             <!-- <select class="select" id="select-code">
+            <label
+              >Select Type Of Password:<br />
+              <!-- <select class="select" id="select-code">
     <option value="">Select a code</option>
     <option value="value1">Code 1</option>
     <option value="value2">Code 2</option>
@@ -28,13 +29,12 @@
     <option value="value4">Code 4</option>
 </select>
 <button id="code-btn">confirm</button><br>
-<input id='input' name="my-quote" type="text" placeholder="type of password "> 
+<input id='input' name="my-quote" type="text" placeholder="type of password ">
 
 document.getElementById('code-btn').onclick = () => {
 let e = document.getElementById('select-code');
 document.getElementById('input').value =  e.options[e.selectedIndex].text;
 } -->
-
             </label>
             <input
               id="title"
@@ -68,14 +68,24 @@ document.getElementById('input').value =  e.options[e.selectedIndex].text;
       <div class="row justify-content-center">
         <div class="form-group">
           <div class="col-md-6 d-flex">
-            <button class="btn btn-primary mr-4" :disabled="isDisabled">Create</button>
+            <button class="btn btn-primary mr-4" :disabled="isDisabled">
+              Create
+            </button>
             <button
               type="button"
               class="btn btn-warning mr-4"
               :disabled="!note.title && !note.body"
               @click.prevent="clearInputs()"
-            >Clear</button>
-            <button type="button" class="btn btn-danger" @click.prevent="backToNotes()">Cancel</button>
+            >
+              Clear
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              @click.prevent="backToNotes()"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
@@ -84,9 +94,7 @@ document.getElementById('input').value =  e.options[e.selectedIndex].text;
 </template>
 
 <script>
-
 export default {
-  
   data() {
     return {
       note: {},
@@ -98,7 +106,7 @@ export default {
       isDisabled: true
     };
   },
-      
+
   methods: {
     addNote() {
       const uri = "/notes/add";
@@ -119,8 +127,6 @@ export default {
       this.hasError = this.remainingCount < 5;
       this.isDisabled = this.note.title.length < 4 || this.note.body.length < 4;
     }
-
   }
-  
 };
 </script>
